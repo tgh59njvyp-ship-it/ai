@@ -1,0 +1,6 @@
+{
+  "name": "Genesis Studio - AI Full-Stack Dev OS",
+  "description": "自然言語から本格的なフルスタックソフトウェアを設計・開発・テスト・検証・Export・Git管理・デプロイまで完結する次世代AI開発プラットフォーム",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
