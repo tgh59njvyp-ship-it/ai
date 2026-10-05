@@ -22,6 +22,7 @@ import { DocsModal } from './components/Docs/DocsModal';
 import { ChangelogModal } from './components/Changelog/ChangelogModal';
 import { StatusModal } from './components/Status/StatusModal';
 import { ShortcutsModal } from './components/Shortcuts/ShortcutsModal';
+import { AutoFixModal } from './components/AutoFix/AutoFixModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { GitHubAuthModal } from './components/Auth/GitHubAuthModal';
 import { Columns, Square, CheckCircle2, AlertCircle, Info } from 'lucide-react';
@@ -156,6 +157,7 @@ function MainAppShell() {
       <ChangelogModal />
       <StatusModal />
       <ShortcutsModal />
+      <AutoFixModal />
       <ExportModal />
       <DeploymentModal />
       <ProjectModal />

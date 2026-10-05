@@ -197,6 +197,17 @@ export interface ProposedFileChange {
   operation: 'create' | 'update' | 'delete';
   description: string;
   accepted: boolean;
+  layer?: 'db' | 'api' | 'ui' | 'config' | 'test';
+  linesCount?: number;
+}
+
+export interface FileConstructionProgress {
+  path: string;
+  status: 'pending' | 'generating' | 'done' | 'failed';
+  operation: 'create' | 'update' | 'delete';
+  layer: 'db' | 'api' | 'ui' | 'config' | 'test';
+  linesCount: number;
+  description: string;
 }
 
 export interface AgentTask {
@@ -206,6 +217,9 @@ export interface AgentTask {
   status: 'idle' | 'running' | 'waiting_approval' | 'done' | 'failed';
   summary?: string;
   plan: string[];
+  activeFileGenerating?: string;
+  activeActionDescription?: string;
+  fileProgress?: FileConstructionProgress[];
   constitutionReport?: {
     compliant: boolean;
     notes: string;
@@ -214,6 +228,43 @@ export interface AgentTask {
   proposedChanges: ProposedFileChange[];
   testResults?: { passed: number; failed: number };
   logs: string[];
+}
+
+export interface AutoFixIteration {
+  iteration: number;
+  stage: 'analyzing' | 'patching' | 'testing' | 'evaluating';
+  patchDescription: string;
+  targetFile: string;
+  proposedChanges: ProposedFileChange[];
+  testResults: {
+    passed: number;
+    failed: number;
+    total: number;
+    tests: { name: string; status: 'passed' | 'failed'; durationMs: number; errorMessage?: string }[];
+    logs: string[];
+  };
+  diagnostics: string;
+  status: 'passed' | 'failed' | 'running';
+}
+
+export interface AutoFixLoopRun {
+  id: string;
+  status: 'idle' | 'analyzing' | 'patching' | 'testing' | 'success' | 'failed';
+  errorDetails: {
+    message: string;
+    stack?: string;
+    filePath?: string;
+    line?: number;
+    type?: string;
+    rootCause?: string;
+  };
+  currentIteration: number;
+  maxIterations: number;
+  iterations: AutoFixIteration[];
+  finalPatch?: ProposedFileChange[];
+  logs: string[];
+  startTime: number;
+  endTime?: number;
 }
 
 export interface BYOKConfig {

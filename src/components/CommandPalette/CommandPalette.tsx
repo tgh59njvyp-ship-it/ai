@@ -20,6 +20,8 @@ import {
   DollarSign,
   History,
   X,
+  Wrench,
+  Zap,
 } from 'lucide-react';
 
 export const CommandPalette: React.FC = () => {
@@ -34,6 +36,8 @@ export const CommandPalette: React.FC = () => {
     setIsDocsOpen,
     setIsPricingOpen,
     setIsChangelogOpen,
+    setIsAutoFixModalOpen,
+    startAutoFixLoop,
     runAllTests,
     showToast,
   } = useProject();
@@ -61,6 +65,15 @@ export const CommandPalette: React.FC = () => {
   }
 
   const commands: CommandItem[] = [
+    {
+      id: 'cmd-autofix',
+      title: 'Auto-Fix & Test Loop (エラー自動解析＆テスト検証ループ)',
+      category: 'AI & Quality',
+      icon: Zap,
+      action: () => {
+        setIsAutoFixModalOpen(true);
+      },
+    },
     {
       id: 'cmd-studio',
       title: '開発スタジオを開く (Launch Studio)',

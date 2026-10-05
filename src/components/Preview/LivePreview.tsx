@@ -22,6 +22,7 @@ export const LivePreview: React.FC = () => {
     clearConsole,
     runtimeError,
     runAgentPrompt,
+    startAutoFixLoop,
     setActiveView,
   } = useProject();
 
@@ -125,14 +126,11 @@ export const LivePreview: React.FC = () => {
             <span className="truncate font-medium">実行時エラー: {runtimeError}</span>
           </div>
           <button
-            onClick={() => {
-              setActiveView('agent');
-              runAgentPrompt(`エラーを自動修正してください: ${runtimeError}`, 'fix');
-            }}
-            className="flex items-center gap-1 px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-[11px] font-semibold shrink-0 transition-colors cursor-pointer shadow-xs"
+            onClick={() => startAutoFixLoop(runtimeError)}
+            className="flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-rose-600 to-indigo-600 hover:from-rose-700 hover:to-indigo-700 text-white rounded-lg text-xs font-bold shrink-0 transition-all cursor-pointer shadow-xs"
           >
-            <Wrench className="w-3 h-3" />
-            <span>AIでエラー自動修正</span>
+            <Wrench className="w-3.5 h-3.5" />
+            <span>Auto-Fix & Test Loop を起動</span>
           </button>
         </div>
       )}

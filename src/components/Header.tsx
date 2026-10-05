@@ -29,6 +29,8 @@ export const Header: React.FC = () => {
     runAllTests,
     runtimeError,
     runAgentPrompt,
+    startAutoFixLoop,
+    setIsAutoFixModalOpen,
     setActiveView,
     setDisplayMode,
     setIsCommandPaletteOpen,
@@ -197,15 +199,12 @@ export const Header: React.FC = () => {
         {/* Runtime Error Auto-Fix Pill */}
         {runtimeError && (
           <button
-            onClick={() => {
-              setActiveView('agent');
-              runAgentPrompt(`エラーを自動修正してください: ${runtimeError}`, 'fix');
-            }}
-            title="AIでエラー自動修正"
-            className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1.5 bg-rose-50 border border-rose-200 text-rose-700 hover:bg-rose-100 rounded-lg text-xs font-medium transition-colors cursor-pointer animate-pulse"
+            onClick={() => startAutoFixLoop(runtimeError)}
+            title="Auto-Fix & Test Loop を起動"
+            className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1.5 bg-gradient-to-r from-rose-50 to-indigo-50 border border-rose-300 text-rose-800 hover:bg-rose-100 rounded-lg text-xs font-bold transition-colors cursor-pointer animate-pulse"
           >
-            <Wrench className="w-3.5 h-3.5 shrink-0" />
-            <span className="hidden sm:inline">AI修復</span>
+            <Wrench className="w-3.5 h-3.5 text-rose-600 shrink-0" />
+            <span className="hidden sm:inline">Auto-Fix Loop</span>
           </button>
         )}
 
